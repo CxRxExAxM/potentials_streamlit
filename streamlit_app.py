@@ -5,7 +5,8 @@ import io
 
 
 st.title("Generate Potentials Information")
-st.write('Upload hitlist, and 21day .xlsx files')
+st.write('Upload Hitlist, and 21-Day Potentials .xlsx files')
+st.write('Ensure the upload files do not have additional sheets')
 
 if 'clean_dfs' not in st.session_state:
     st.session_state.clean_dfs = {}
@@ -165,6 +166,7 @@ def clean_group_data(df):
     return cleaned_groups
 
 
+st.write('After uploading both files, hit the "Process Files" button.')
 if st.button('Process Files'):
     cleaned_hitlist = clean_hitlist_data(hitlist_df)
     st.session_state.clean_dfs['Hitlist'] = cleaned_hitlist
@@ -172,6 +174,7 @@ if st.button('Process Files'):
     st.session_state.clean_dfs['Forecast'] = cleaned_forecast
     cleaned_groups = clean_group_data(forecast_df)
     st.session_state.clean_dfs['Group Rooms'] = cleaned_groups
+st.write('Next, once the browser stops thinking, press the button below to generate and provide .xlsx download link')
 
 
 def combine_dfs(dict):
@@ -195,6 +198,7 @@ if st.button('Generate .xlsx export'):
         file_name=file_name,
         mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     )
+st.write('Once download button appears, you\'re all set!')
   
 
 
